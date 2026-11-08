@@ -1,0 +1,146 @@
+/* styles.css: estilos, colores, distribución y diseño responsivo */
+
+/* Variables de color: cambiar aquí modifica toda la paleta */
+:root {
+  --navy: #0b2545;
+  --navy-light: #13315c;
+  --turquoise: #14b8a6;
+  --turquoise-dark: #0d8f81;
+  --white: #ffffff;
+  --text: #1c2b3a;
+  --muted: #5b6b7c;
+  --border: #c9d3de;
+  --error: #b42318;
+  --success-bg: #e6f7f4;
+  --error-bg: #fdecea;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color: var(--text);
+  background: #eef3f8;
+  line-height: 1.5;
+}
+
+/* Enlace de accesibilidad: solo visible al recibir foco con teclado */
+.skip-link {
+  position: absolute; left: -999px; top: 0;
+  background: var(--navy); color: var(--white); padding: .5rem 1rem;
+}
+.skip-link:focus { left: 0; z-index: 10; }
+
+/* Distribución principal con CSS Grid: 2 columnas en escritorio */
+.login-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Panel izquierdo azul oscuro */
+.brand-panel {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 100%);
+  color: var(--white);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 4rem;
+  gap: 1rem;
+}
+.brand-icon { width: 64px; height: 64px; fill: var(--turquoise); }
+.brand-panel h1 { font-size: 2.25rem; line-height: 1.2; max-width: 16ch; }
+.brand-panel p { color: #cfe3ef; max-width: 36ch; }
+
+/* Panel derecho con el formulario centrado (Flexbox) */
+.form-panel { display: flex; align-items: center; justify-content: center; padding: 2rem; }
+
+.card {
+  width: 100%; max-width: 420px;
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;                       /* bordes redondeados */
+  box-shadow: 0 10px 30px rgba(11, 37, 69, .12); /* sombra suave */
+}
+.card h2 { color: var(--navy); font-size: 1.75rem; }
+.subtitle { color: var(--muted); margin: .25rem 0 1.5rem; }
+
+/* Campos */
+.field { margin-bottom: 1.1rem; }
+label { display: block; font-weight: 600; font-size: .9rem; color: var(--navy); margin-bottom: .35rem; }
+
+.input-wrap { position: relative; }
+.input-wrap input {
+  width: 100%;
+  padding: .8rem 2.8rem;                      /* espacio para íconos */
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+/* Indicador visual de foco */
+.input-wrap input:focus {
+  outline: none;
+  border-color: var(--turquoise);
+  box-shadow: 0 0 0 4px rgba(20, 184, 166, .25);
+}
+.input-wrap input.invalid { border-color: var(--error); }
+
+.icon, .toggle svg { width: 20px; height: 20px; fill: var(--muted); }
+.icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+
+.toggle {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; padding: 6px; border-radius: 8px; cursor: pointer;
+}
+.toggle:hover svg, .toggle:focus-visible svg { fill: var(--turquoise-dark); }
+.toggle:focus-visible, a:focus-visible, .check input:focus-visible {
+  outline: 3px solid var(--turquoise); outline-offset: 2px;
+}
+
+/* Mensajes de error bajo cada campo */
+.error { color: var(--error); font-size: .85rem; min-height: 1.2rem; margin-top: .3rem; }
+
+/* Opciones: recordar y olvidé contraseña */
+.options {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1.5rem; font-size: .9rem;
+}
+.check { display: flex; align-items: center; gap: .5rem; margin: 0; font-weight: 400; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--turquoise-dark); }
+.options a { color: var(--turquoise-dark); font-weight: 600; text-decoration: none; }
+.options a:hover { text-decoration: underline; }
+
+/* Botón principal con efecto hover */
+.btn-primary {
+  width: 100%; padding: .9rem;
+  background: var(--navy); color: var(--white);
+  border: none; border-radius: 12px;
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.btn-primary:hover { background: var(--turquoise-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(13, 143, 129, .35); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:focus-visible { outline: 3px solid var(--turquoise); outline-offset: 3px; }
+
+/* Mensaje de resultado */
+.message { margin-top: 1rem; padding: 0; border-radius: 10px; font-weight: 600; text-align: center; }
+.message.success { padding: .8rem; background: var(--success-bg); color: #0a5c52; }
+.message.fail    { padding: .8rem; background: var(--error-bg);   color: var(--error); }
+
+/* Tabletas: reducir espacios */
+@media (max-width: 900px) {
+  .brand-panel { padding: 2.5rem; }
+  .brand-panel h1 { font-size: 1.75rem; }
+}
+
+/* Móviles: una sola columna */
+@media (max-width: 700px) {
+  .login-layout { grid-template-columns: 1fr; }
+  .brand-panel { padding: 1.5rem; flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .brand-icon { width: 40px; height: 40px; }
+  .brand-panel h1 { font-size: 1.2rem; max-width: none; flex: 1; }
+  .brand-panel p { display: none; }
+  .card { padding: 2rem 1.25rem; }
+}
+
+/* Respeta a quienes prefieren menos animaciones */
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

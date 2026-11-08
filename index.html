@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- index.html: estructura semántica de la página de inicio de sesión -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Necesario para que el diseño responsivo funcione en móviles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión | Portal Académico</title>
+  <!-- Vinculación de la hoja de estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Enlace para saltar al contenido (accesibilidad con teclado) -->
+  <a class="skip-link" href="#email">Ir al formulario</a>
+
+  <main class="login-layout">
+
+    <!-- Panel de bienvenida (lado izquierdo en escritorio) -->
+    <aside class="brand-panel">
+      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Zm-1.2 14-3.3-3.3 1.4-1.4 1.9 1.9 4.4-4.4 1.4 1.4-5.8 5.8Z"/>
+      </svg>
+      <h1>Tu espacio de estudio, siempre protegido</h1>
+      <p>Ingresa para consultar tus cursos, tareas y calificaciones.</p>
+    </aside>
+
+    <!-- Tarjeta del formulario -->
+    <section class="form-panel">
+      <div class="card">
+        <h2>Iniciar sesión</h2>
+        <p class="subtitle">Usa tu correo y contraseña para continuar.</p>
+
+        <!-- novalidate: desactiva la validación del navegador para usar la nuestra -->
+        <form id="loginForm" novalidate>
+
+          <!-- Campo: correo electrónico -->
+          <div class="field">
+            <label for="email">Correo electrónico</label>
+            <div class="input-wrap">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.4 0-8 2.2-8 5v3h16v-3c0-2.8-3.6-5-8-5Z"/></svg>
+              <input type="email" id="email" name="email" placeholder="nombre@ejemplo.com"
+                     autocomplete="email" aria-describedby="emailError">
+            </div>
+            <!-- role="alert": los lectores de pantalla anuncian el error -->
+            <p class="error" id="emailError" role="alert"></p>
+          </div>
+
+          <!-- Campo: contraseña -->
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <div class="input-wrap">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9h-2Zm-8-2a3 3 0 0 1 6 0v2H9V7Zm3 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg>
+              <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres"
+                     autocomplete="current-password" aria-describedby="passwordError">
+              <!-- Botón mostrar/ocultar contraseña -->
+              <button type="button" id="togglePassword" class="toggle" aria-label="Mostrar contraseña" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.1 11-7c-1.7-3.9-6-7-11-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>
+              </button>
+            </div>
+            <p class="error" id="passwordError" role="alert"></p>
+          </div>
+
+          <!-- Recordar correo y enlace de recuperación -->
+          <div class="options">
+            <label class="check">
+              <input type="checkbox" id="remember">
+              <span>Recordar mi correo</span>
+            </label>
+            <a href="#" id="forgot">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Iniciar sesión</button>
+
+          <!-- Mensajes de resultado; aria-live avisa a lectores de pantalla -->
+          <p id="formMessage" class="message" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Vinculación del script (al final para que el HTML ya exista) -->
+  <script src="script.js"></script>
+</body>
+</html>
